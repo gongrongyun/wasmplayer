@@ -1,0 +1,14 @@
+prefix=/root/code/ffprobe-wasm/core/third_party/ffmpeg
+exec_prefix=${prefix}
+libdir=/root/code/ffprobe-wasm/core/third_party/ffmpeg/lib
+includedir=/root/code/ffprobe-wasm/core/third_party/ffmpeg/include
+
+Name: libavutil
+Description: FFmpeg utility library
+Version: 58.3.100
+Requires: 
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavutil -pthread -lm -lX11
+Libs.private: 
+Cflags: -I${includedir}

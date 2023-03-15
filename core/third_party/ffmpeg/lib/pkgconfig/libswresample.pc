@@ -1,0 +1,14 @@
+prefix=/root/code/ffprobe-wasm/core/third_party/ffmpeg
+exec_prefix=${prefix}
+libdir=/root/code/ffprobe-wasm/core/third_party/ffmpeg/lib
+includedir=/root/code/ffprobe-wasm/core/third_party/ffmpeg/include
+
+Name: libswresample
+Description: FFmpeg audio resampling library
+Version: 4.11.100
+Requires: libavutil >= 58.3.100
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lswresample -lm
+Libs.private: 
+Cflags: -I${includedir}

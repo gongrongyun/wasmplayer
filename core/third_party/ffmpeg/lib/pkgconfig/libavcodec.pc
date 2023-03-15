@@ -1,0 +1,14 @@
+prefix=/root/code/ffprobe-wasm/core/third_party/ffmpeg
+exec_prefix=${prefix}
+libdir=/root/code/ffprobe-wasm/core/third_party/ffmpeg/lib
+includedir=/root/code/ffprobe-wasm/core/third_party/ffmpeg/include
+
+Name: libavcodec
+Description: FFmpeg codec library
+Version: 60.6.100
+Requires: libswresample >= 4.11.100, libavutil >= 58.3.100
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavcodec -pthread -lm
+Libs.private: 
+Cflags: -I${includedir}

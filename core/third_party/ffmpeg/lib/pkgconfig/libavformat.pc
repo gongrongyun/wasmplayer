@@ -1,0 +1,14 @@
+prefix=/root/code/ffprobe-wasm/core/third_party/ffmpeg
+exec_prefix=${prefix}
+libdir=/root/code/ffprobe-wasm/core/third_party/ffmpeg/lib
+includedir=/root/code/ffprobe-wasm/core/third_party/ffmpeg/include
+
+Name: libavformat
+Description: FFmpeg container format library
+Version: 60.4.100
+Requires: libavcodec >= 60.6.100, libswresample >= 4.11.100, libavutil >= 58.3.100
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavformat -lm
+Libs.private: 
+Cflags: -I${includedir}
