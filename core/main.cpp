@@ -2,6 +2,10 @@
 #include "player.h"
 #include <emscripten.h>
 
+extern "C" {
+    #include <libavutil/version.h>
+}
+
 static Player *player = nullptr;
 
 EMSCRIPTEN_KEEPALIVE
@@ -42,5 +46,5 @@ extern "C" void destroy()
 
 int main()
 {
-    printf("ffmpeg version:%s\n", "0.0.1");
+    printf("ffmpeg version:%u\n", avcodec_version());
 }

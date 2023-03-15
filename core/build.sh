@@ -10,7 +10,7 @@ PLAYER_LIB_DIR=/root/code/ffprobe-wasm/core/build
 
 emcc ./main.cpp \
  -I ${PLAYER_INCLUDE_DIR} ${PLAYER_LIB_DIR}/libffprobe_wasm.a \
- -I ${FFMPEG_INCLUDE_DIR} ${FFMPEG_LIB_DIR}/libavformat.a ${FFMPEG_LIB_DIR}/libavcodec.a ${FFMPEG_LIB_DIR}/libavutil.a ${FFMPEG_LIB_DIR}/libswscale.a ${FFMPEG_LIB_DIR}/libswresample.a \
+ -I ${FFMPEG_INCLUDE_DIR} ${FFMPEG_LIB_DIR}/libavformat.a ${FFMPEG_LIB_DIR}/libavcodec.a ${FFMPEG_LIB_DIR}/libavutil.a ${FFMPEG_LIB_DIR}/libswscale.a ${FFMPEG_LIB_DIR}/libswresample.a ${FFMPEG_LIB_DIR}/libavutil.a \
  -O2 \
  -s ALLOW_TABLE_GROWTH=1 \
  -s ALLOW_MEMORY_GROWTH=1 \
