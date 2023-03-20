@@ -1,20 +1,18 @@
 #ifndef __PLAYER__
 #define __PLAYER__
 
-extern "C"
-{
+extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libavutil/imgutils.h>
 #include <libswscale/swscale.h>
 
-    typedef void receive(uint8_t **data, int y_size);
+typedef void receive(uint8_t **data, int y_size);
 };
 
 #include <emscripten.h>
 
-class Player
-{
+class Player {
 private:
   char *url;
   AVFormatContext *pFormatCtx;

@@ -1,2 +1,0 @@
-/Users/rongyun.gong/code/learn/wasmplayer/core/out/CMakeFiles/edit_cache.dir
-/Users/rongyun.gong/code/learn/wasmplayer/core/out/CMakeFiles/rebuild_cache.dir

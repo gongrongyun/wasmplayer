@@ -7,11 +7,11 @@
 
 #pragma once
 
-#include <emscripten/em_macros.h>
+#include <em_macros.h>
 
 #ifdef __cplusplus
 #define _EM_JS_CPP_BEGIN extern "C" {
-#define _EM_JS_CPP_END   }
+#define _EM_JS_CPP_END }
 #else // __cplusplus
 #define _EM_JS_CPP_BEGIN
 #define _EM_JS_CPP_END
@@ -28,10 +28,9 @@
 // function bodies containing commas are seamlessly handled.
 
 // EM_JS declares the JS function with a C function prototype, which becomes a
-// function import in wasm. It also declares an __em_js__-prefixed string constant,
-// which we can use to pass information to the Emscripten compiler that survives
-// going through LLVM.
-// Example:
+// function import in wasm. It also declares an __em_js__-prefixed string
+// constant, which we can use to pass information to the Emscripten compiler
+// that survives going through LLVM. Example:
 //
 //   EM_JS(int, foo, (int x, int y), { return 2 * x + y; })
 //
@@ -59,15 +58,17 @@
 // emJsFuncs metadata is read in emscripten.py's create_em_js, which creates an
 // array of JS function strings to be included in the JS output.
 
-#define _EM_JS(ret, c_name, js_name, params, code)                                                 \
-  _EM_JS_CPP_BEGIN                                                                                 \
-  ret c_name params EM_IMPORT(js_name);                                                            \
-  EMSCRIPTEN_KEEPALIVE                                                                             \
-  __attribute__((section("em_js"), aligned(1))) char __em_js__##js_name[] =                        \
-    #params "<::>" code;                                                                           \
+#define _EM_JS(ret, c_name, js_name, params, code)                             \
+  _EM_JS_CPP_BEGIN                                                             \
+  ret c_name params EM_IMPORT(js_name);                                        \
+  EMSCRIPTEN_KEEPALIVE                                                         \
+  __attribute__((section("em_js"), aligned(1))) char __em_js__##js_name[] =    \
+      #params "<::>" code;                                                     \
   _EM_JS_CPP_END
 
-#define EM_JS(ret, name, params, ...) _EM_JS(ret, name, name, params, #__VA_ARGS__)
+#define EM_JS(ret, name, params, ...)                                          \
+  _EM_JS(ret, name, name, params, #__VA_ARGS__)
 
-#define EM_ASYNC_JS(ret, name, params, ...) _EM_JS(ret, name, __asyncjs__##name, params,          \
-  "{ return Asyncify.handleAsync(async () => " #__VA_ARGS__ "); }")
+#define EM_ASYNC_JS(ret, name, params, ...)                                    \
+  _EM_JS(ret, name, __asyncjs__##name, params,                                 \
+         "{ return Asyncify.handleAsync(async () => " #__VA_ARGS__ "); }")
