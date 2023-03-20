@@ -8,7 +8,7 @@ extern "C"
 #include <libavutil/imgutils.h>
 #include <libswscale/swscale.h>
 
-  typedef void receive(uint8_t **data, int y_size);
+    typedef void receive(uint8_t **data, int y_size);
 };
 
 #include <emscripten.h>

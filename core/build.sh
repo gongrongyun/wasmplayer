@@ -19,5 +19,3 @@ emcc ./main.cpp \
  -s EXPORTED_RUNTIME_METHODS='["ccall", "cwrap", "dynCall", "allocate", "addFunction", "UTF8ToString" , "intArrayFromString", "ALLOC_NORMAL"]' \
  -s TOTAL_MEMORY=${TOTAL_MEMORY} \
  -o glue.js
-
-
