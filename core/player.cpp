@@ -15,6 +15,8 @@ Player::~Player()
 
 bool Player::prepare(char *url, int cb)
 {
+  printf("url %s\n", url);
+  EM_ASM(console.log("prepare"));
   cb = cb;
   avformat_network_init();
   pFormatCtx = avformat_alloc_context();
@@ -23,9 +25,10 @@ bool Player::prepare(char *url, int cb)
     EM_ASM(console.log('open url error'));
     return false;
   }
+  printf("open url success");
   if (avformat_find_stream_info(pFormatCtx, nullptr) < 0)
   {
-    EM_ASM(console.log('do not found stream info'));
+    EM_ASM(console.log("do not found stream info"));
     return false;
   }
 
@@ -38,14 +41,14 @@ bool Player::prepare(char *url, int cb)
   }
   if (vStream == nullptr)
   {
-    EM_ASM(console.log('video stream not found'));
+    EM_ASM(console.log("video stream not found"));
     return false;
   }
-
+  EM_ASM(console.log("find stream"));
   pCodec = avcodec_find_decoder(vStream->codecpar->codec_id);
   if (pCodec == nullptr)
   {
-    EM_ASM(console.log('do not found codec'));
+    EM_ASM(console.log("do not found codec"));
     return false;
   }
 
@@ -53,10 +56,10 @@ bool Player::prepare(char *url, int cb)
 
   if (avcodec_open2(pCodecCtx, pCodec, nullptr) < 0)
   {
-    EM_ASM(console.log('can not open codecContext'));
+    EM_ASM(console.log("can not open codecContext"));
     return false;
   }
-
+EM_ASM(console.log("start to malloc"));
   pFrame = av_frame_alloc();
   pFrameYUV = av_frame_alloc();
   out_buffer = (unsigned char *)av_malloc(av_image_get_buffer_size(AV_PIX_FMT_YUV420P, pCodecCtx->width, pCodecCtx->height, 1));
@@ -74,6 +77,7 @@ bool Player::prepare(char *url, int cb)
       nullptr,
       nullptr,
       nullptr);
+  EM_ASM(console.log("finish"));
   return true;
 }
 
@@ -104,7 +108,7 @@ void Player::play()
       }
       else
       {
-        EM_ASM(console.error('decode error', ret));
+        EM_ASM(console.error("decode error", ret));
         break;
       }
     }

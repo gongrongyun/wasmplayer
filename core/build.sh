@@ -5,13 +5,14 @@ PWD=$(pwd)
 
 FFMPEG_INCLUDE_DIR=${PWD}/third_party/ffmpeg/include
 FFMPEG_LIB_DIR=${PWD}/third_party/ffmpeg/lib
-PLAYER_INCLUDE_DIR=/root/code/ffprobe-wasm/core
-PLAYER_LIB_DIR=/root/code/ffprobe-wasm/core/build
+PLAYER_INCLUDE_DIR=.
+PLAYER_LIB_DIR=./build
 
 emcc ./main.cpp \
  -I ${PLAYER_INCLUDE_DIR} ${PLAYER_LIB_DIR}/libffprobe_wasm.a \
  -I ${FFMPEG_INCLUDE_DIR} ${FFMPEG_LIB_DIR}/libavformat.a ${FFMPEG_LIB_DIR}/libavcodec.a ${FFMPEG_LIB_DIR}/libavutil.a ${FFMPEG_LIB_DIR}/libswscale.a ${FFMPEG_LIB_DIR}/libswresample.a ${FFMPEG_LIB_DIR}/libavutil.a \
  -O2 \
+ -lwebsocket.js \
  -s ALLOW_TABLE_GROWTH=1 \
  -s ALLOW_MEMORY_GROWTH=1 \
  -s MODULARIZE=1 \

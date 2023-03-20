@@ -1,7 +1,9 @@
 #ifndef __PLAYER__
 #define __PLAYER__
 
-extern "C" {
+#include <stdio.h>
+extern "C"
+{
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libavutil/imgutils.h>
@@ -10,7 +12,7 @@ extern "C" {
 typedef void receive(uint8_t **data, int y_size);
 };
 
-#include <emscripten.h>
+#include <emscripten/emscripten.h>
 
 class Player {
 private:

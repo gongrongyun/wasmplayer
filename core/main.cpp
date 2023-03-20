@@ -9,7 +9,7 @@ extern "C" {
 static Player *player = nullptr;
 
 EMSCRIPTEN_KEEPALIVE
-extern "C" void prepare(char *url, int cb)
+extern "C" bool prepare(char *url, int cb)
 {
     if (player != nullptr)
     {
@@ -17,7 +17,7 @@ extern "C" void prepare(char *url, int cb)
         player = nullptr;
     }
     player = new Player();
-    player->prepare(url, cb);
+    return player->prepare(url, cb);
 }
 
 EMSCRIPTEN_KEEPALIVE

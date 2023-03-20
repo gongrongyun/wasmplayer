@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # go to ffmpeg dir
-cd $(dirname $0)
+cd $1
 
 # verify Emscripten version
 emcc -v
@@ -29,11 +29,11 @@ CONFIG_ARGS=(
   --objcc=emcc
   --dep-cc=emcc
 
-  --prefix=/root/code/ffprobe-wasm/core/third_party/ffmpeg
+  --prefix=$2
 )
 emconfigure ./configure "${CONFIG_ARGS[@]}"
 
-make -j2
+make -j10
 
 make install
 
